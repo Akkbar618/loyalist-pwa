@@ -1,0 +1,258 @@
+/* ===========================================
+   MAIN SCREEN - QR Code, Points Cards
+   =========================================== */
+
+/* Welcome Section */
+.welcome-section {
+    font-family: var(--font-primary);
+    font-weight: var(--font-weight-medium);
+    font-stretch: var(--font-stretch-normal);
+    background: rgb(0, 0, 0);
+    color: white;
+    padding: 20px;
+    border-radius: 18px;
+    margin: 10px 10px 0 10px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.welcome-qr-section {
+    background: var(--screen-background);
+    border-radius: 18px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+[data-theme="dark"] .welcome-qr-section {
+    background: #1e1e1e;
+}
+
+.welcome-header {
+    padding: 20px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+    background: #000;
+    color: white;
+}
+
+[data-theme="dark"] .welcome-header {
+    background: #000;
+}
+
+/* QR Section */
+.qr-section {
+    background: rgb(255, 255, 255);
+    margin: 0 10px;
+    padding: 20px;
+    border-radius: 0 0 18px 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+[data-theme="dark"] .qr-section {
+    background: #1e1e1e;
+}
+
+.qr-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.qr-code {
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .qr-code {
+    background: #2a2a2a;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.qr-code img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Main Content */
+.main-content {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 15px;
+}
+
+/* Points Card */
+.points-card {
+    background: rgb(255, 255, 255);
+    margin: 15px 0;
+    padding: 20px;
+    border-radius: 18px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .points-card {
+    background: #1a1a1a;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.cafe-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 8px;
+    text-align: left;
+}
+
+.product-title {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+[data-theme="dark"] .product-title {
+    color: #a0a0a0;
+}
+
+/* Points Info Row */
+.points-info-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 15px 0;
+}
+
+.points-info-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 15px 0;
+}
+
+/* Progress Dots */
+.progress-dots {
+    flex: 1;
+    display: flex;
+    gap: 6px;
+    margin-right: 15px;
+    flex-wrap: wrap;
+}
+
+.dot {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: rgb(211, 204, 227);
+    transition: background-color 0.3s ease;
+}
+
+.dot.active {
+    background: rgb(106, 13, 173);
+}
+
+/* Rewards Count */
+.rewards-count {
+    font-size: 15px;
+    color: rgb(106, 13, 173);
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+/* Update Time */
+.update-time {
+    font-size: 12px;
+    color: #888;
+    text-align: right;
+    margin-top: 10px;
+}
+
+[data-theme="dark"] .update-time {
+    color: #808080;
+}
+
+/* Progress Bar */
+.progress-container {
+    margin: 15px 0;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+    font-size: 14px;
+    color: var(--text-color);
+}
+
+/* Reward Modal */
+.reward-modal {
+    background: var(--screen-background);
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    max-width: 320px;
+    transform: translateY(50px);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .reward-modal {
+    background: #1e1e1e;
+}
+
+.reward-modal.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.reward-modal .success-icon {
+    width: 64px;
+    height: 64px;
+    color: #4CAF50;
+    margin-bottom: 20px;
+}
+
+.reward-modal h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+.reward-modal p {
+    color: #666;
+    margin-bottom: 25px;
+}
+
+.close-reward-btn {
+    background: rgb(106, 13, 173);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.close-reward-btn:hover {
+    background: rgb(86, 10, 143);
+}

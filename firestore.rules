@@ -1,0 +1,97 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // ============================================
+    // Helper functions
+    // ============================================
+    
+    // Check if user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    // Check if user is accessing their own data
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+    
+    // Check if data has required fields
+    function hasRequiredFields(fields) {
+      return request.resource.data.keys().hasAll(fields);
+    }
+    
+    // Validate email format (basic check)
+    function isValidEmail() {
+      return request.resource.data.email is string 
+        && request.resource.data.email.size() > 5
+        && request.resource.data.email.matches('.*@.*\\..*');
+    }
+    
+    // ============================================
+    // Users collection
+    // ============================================
+    match /users/{userId} {
+      // Users can read only their own profile
+      allow read: if isOwner(userId);
+      
+      // Users can create their own profile with required fields
+      allow create: if isOwner(userId)
+        && hasRequiredFields(['userId', 'email', 'registrationDate'])
+        && request.resource.data.userId == userId
+        && request.resource.data.role == 'USER'
+        && request.resource.data.totalPoints == 0
+        && request.resource.data.visitCount == 0;
+      
+      // Users can update limited fields in their profile
+      allow update: if isOwner(userId)
+        && (!request.resource.data.diff(resource.data).affectedKeys()
+            .hasAny(['userId', 'role', 'registrationDate']));
+      
+      // Only allow delete if user is owner
+      allow delete: if isOwner(userId);
+    }
+    
+    // ============================================
+    // User Points collection
+    // ============================================
+    match /userPoints/{pointId} {
+      // Users can read only their own points
+      allow read: if isAuthenticated() 
+        && resource.data.userId == request.auth.uid;
+      
+      // Users cannot create/update/delete points directly
+      // Points are managed by admin/backend
+      allow create, update, delete: if false;
+    }
+    
+    // ============================================
+    // Cafes collection (read-only for users)
+    // ============================================
+    match /cafes/{cafeId} {
+      // Anyone authenticated can read cafes
+      allow read: if isAuthenticated();
+      
+      // No write access for users
+      allow write: if false;
+    }
+    
+    // ============================================
+    // Products collection (read-only for users)
+    // ============================================
+    match /products/{productId} {
+      // Anyone authenticated can read products
+      allow read: if isAuthenticated();
+      
+      // No write access for users
+      allow write: if false;
+    }
+    
+    // ============================================
+    // Default: deny everything else
+    // ============================================
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

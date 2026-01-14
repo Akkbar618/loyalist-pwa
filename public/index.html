@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="Лоялист - программа лояльности. Накапливайте баллы и получайте награды." />
+
+  <!-- Security: Content Security Policy -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' https://www.gstatic.com https://cdnjs.cloudflare.com;
+    style-src 'self' 'unsafe-inline';
+    font-src 'self';
+    img-src 'self' data: blob:;
+    connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://*.firebase.com wss://*.firebaseio.com;
+    frame-src 'none';
+    object-src 'none';
+    base-uri 'self';
+  " />
+
+  <!-- Security: Additional headers -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+  <!-- PWA Meta Tags -->
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#111111" media="(prefers-color-scheme: dark)" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Лоялист" />
+  <meta name="mobile-web-app-capable" content="yes" />
+
+  <title>Лоялист - Программа лояльности</title>
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json" />
+
+  <!-- Icons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+
+  <!-- Preload critical resources -->
+  <link rel="preload" href="./fonts/Saira-VariableFont_wdth,wght.ttf" as="font" type="font/ttf" crossorigin />
+  <link rel="preload" href="styles/main.css" as="style" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles/main.css" />
+</head>
+
+<body>
+  <!-- Skip link for accessibility -->
+  <a href="#app-container" class="skip-link">Перейти к содержимому</a>
+
+  <div id="theme-switch-container" role="complementary" aria-label="Переключатель темы"></div>
+  <div id="error-container" role="alert" aria-live="polite"></div>
+  <main id="app-container" role="main" aria-label="Основное содержимое">
+    <!-- Loading skeleton -->
+    <div class="loading-container" aria-busy="true" aria-label="Загрузка...">
+      <div class="loading-spinner"></div>
+    </div>
+  </main>
+
+  <!-- Firebase -->
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js"></script>
+
+  <!-- QR Code Generator -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+
+  <!-- Main App -->
+  <script type="module" src="app.js"></script>
+
+  <!-- Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then((registration) => {
+            console.log('SW registered:', registration.scope);
+          })
+          .catch((error) => {
+            console.log('SW registration failed:', error);
+          });
+      });
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,279 @@
+/* ===========================================
+   ACCESSIBILITY ENHANCEMENTS
+   =========================================== */
+
+/* ===========================================
+   FOCUS STATES
+   =========================================== */
+
+/* Custom focus ring */
+.focus-ring:focus {
+    outline: none;
+    box-shadow:
+        0 0 0 2px var(--bg),
+        0 0 0 4px var(--primary-color);
+}
+
+/* Focus within for containers */
+.focus-within:focus-within {
+    box-shadow: 0 0 0 2px var(--primary-color);
+}
+
+/* No outline for mouse users */
+.js-focus-visible :focus:not(.focus-visible) {
+    outline: none;
+}
+
+/* ===========================================
+   KEYBOARD NAVIGATION
+   =========================================== */
+
+/* Roving tabindex items */
+[role="menuitem"],
+[role="option"],
+[role="tab"] {
+    cursor: pointer;
+}
+
+[role="menuitem"]:focus,
+[role="option"]:focus,
+[role="tab"]:focus {
+    background: var(--surface-3);
+    outline: 2px solid var(--primary-color);
+    outline-offset: -2px;
+}
+
+/* Active/selected states */
+[aria-selected="true"],
+[aria-current="true"],
+[aria-checked="true"] {
+    background: var(--surface-3);
+    font-weight: 600;
+}
+
+/* Disabled states */
+[aria-disabled="true"],
+[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* ===========================================
+   LIVE REGIONS
+   =========================================== */
+
+/* Status messages */
+[role="status"],
+[role="alert"] {
+    /* Ensure proper spacing for screen reader users */
+}
+
+/* Loading indicator */
+[aria-busy="true"] {
+    position: relative;
+}
+
+[aria-busy="true"]::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--surface-3);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+/* ===========================================
+   FORM ACCESSIBILITY
+   =========================================== */
+
+/* Required field indicator */
+.required-indicator::after {
+    content: ' *';
+    color: var(--danger-color);
+}
+
+/* Field error state */
+[aria-invalid="true"] {
+    border-color: var(--danger-color) !important;
+    box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.2);
+}
+
+.field-error {
+    color: var(--danger-color);
+    font-size: 13px;
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.field-error::before {
+    content: '⚠';
+}
+
+/* Success state */
+[aria-invalid="false"] {
+    border-color: #10B981 !important;
+}
+
+/* ===========================================
+   MODAL ACCESSIBILITY
+   =========================================== */
+
+/* Modal dialog */
+[role="dialog"],
+[role="alertdialog"] {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1001;
+    background: var(--surface-1);
+    border-radius: 16px;
+    padding: 24px;
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow: auto;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+}
+
+/* Modal backdrop */
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+/* Dialog title */
+[role="dialog"] h2,
+[role="alertdialog"] h2 {
+    margin-top: 0;
+    margin-bottom: 16px;
+}
+
+/* ===========================================
+   TOOLTIP ACCESSIBILITY
+   =========================================== */
+
+[role="tooltip"] {
+    position: absolute;
+    background: var(--surface-1);
+    color: var(--text-primary);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    z-index: 10000;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+[aria-describedby]:hover+[role="tooltip"],
+[aria-describedby]:focus+[role="tooltip"] {
+    opacity: 1;
+}
+
+/* ===========================================
+   COLOR CONTRAST FIXES
+   =========================================== */
+
+/* Ensure minimum 4.5:1 contrast ratio for text */
+.high-contrast-text {
+    color: var(--text-primary);
+    text-shadow: none;
+}
+
+/* Link contrast */
+a:not(.btn) {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+}
+
+a:not(.btn):hover {
+    text-decoration-thickness: 2px;
+}
+
+/* ===========================================
+   MOTION PREFERENCES
+   =========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    /* Disable all animations */
+    .skeleton,
+    .loading-spinner,
+    [aria-busy="true"]::after {
+        animation: none;
+    }
+
+    .skeleton {
+        background: var(--surface-3);
+    }
+
+    /* Instant transitions */
+    .screen-enter,
+    .screen-exit,
+    .slide-in-right,
+    .slide-in-left {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+
+/* ===========================================
+   TOUCH TARGET SIZES
+   =========================================== */
+
+/* Minimum 44x44px touch targets */
+.touch-target {
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Ensure buttons meet minimum size */
+button,
+[role="button"],
+.btn {
+    min-height: 44px;
+    padding: 12px 16px;
+}
+
+/* Menu items */
+[role="menuitem"] {
+    min-height: 44px;
+    padding: 12px 16px;
+}
+
+/* ===========================================
+   NAVIGATION LANDMARKS
+   =========================================== */
+
+/* Ensure main content is clearly delineated */
+main,
+[role="main"] {
+    outline: none;
+}
+
+/* Banner region */
+header,
+[role="banner"] {
+    position: relative;
+}
+
+/* Contentinfo region */
+footer,
+[role="contentinfo"] {
+    margin-top: auto;
+}

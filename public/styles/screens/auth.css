@@ -1,0 +1,65 @@
+/* ===========================================
+   AUTH SCREENS - Login, Register, Reset
+   =========================================== */
+
+/* Auth Logo */
+.auth-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 24px;
+    animation: fadeIn 0.8s cubic-bezier(.4, 0, .2, 1);
+}
+
+.auth-logo__icon {
+    width: 56px;
+    height: 56px;
+    margin-bottom: 8px;
+}
+
+.auth-logo__title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2d3a4a;
+    letter-spacing: -1px;
+}
+
+/* Dark theme auth */
+[data-theme="dark"] .input-container input {
+    background: #2a2a2a;
+    color: #e1e1e1;
+    border-color: #404040;
+}
+
+[data-theme="dark"] .input-container label {
+    color: #a0a0a0;
+}
+
+[data-theme="dark"] .input-container input:focus+label,
+[data-theme="dark"] .input-container input:not(:placeholder-shown)+label {
+    color: rgb(147, 51, 234);
+}
+
+[data-theme="dark"] .input-container .underline {
+    background: #404040;
+}
+
+[data-theme="dark"] .input-container input:focus~.underline {
+    background: rgb(147, 51, 234);
+}
+
+[data-theme="dark"] .btn {
+    background: rgb(147, 51, 234);
+}
+
+[data-theme="dark"] .btn:hover {
+    background: rgb(168, 85, 247);
+}
+
+[data-theme="dark"] .footer-text {
+    color: #a0a0a0;
+}
+
+[data-theme="dark"] .footer-text span {
+    color: rgb(147, 51, 234);
+}

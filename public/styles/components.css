@@ -1,0 +1,304 @@
+/* ===========================================
+   COMPONENTS - Buttons, Inputs, Cards, Messages
+   =========================================== */
+
+/* Screen Container */
+.screen {
+    width: 100%;
+    max-width: 480px;
+    background: var(--surface-1);
+    border-radius: 16px;
+    padding: 48px 32px;
+    text-align: center;
+    position: relative;
+    margin: 32px auto;
+    box-shadow: var(--shadow);
+    animation: fadeSlideIn 0.5s cubic-bezier(.4, 0, .2, 1);
+    border: none;
+    transition: background 0.3s, color 0.3s;
+}
+
+/* Typography */
+h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 36px;
+    letter-spacing: -1px;
+    color: var(--text-primary);
+}
+
+/* Input Group */
+.input-group {
+    margin-bottom: 32px;
+}
+
+.input-container {
+    position: relative;
+    margin: 28px 0 0 0;
+    width: 100%;
+}
+
+.input-container input[type="text"],
+.input-container input[type="email"],
+.input-container input[type="password"] {
+    width: 100%;
+    font-size: 17px;
+    padding: 16px 12px;
+    background: var(--surface-2);
+    color: var(--text-primary);
+    border: none;
+    border-radius: 6px;
+    outline: none;
+    box-sizing: border-box;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+    transition: background 0.3s, color 0.3s, box-shadow 0.2s;
+    opacity: 1;
+    animation: inputFadeIn 0.7s;
+}
+
+.input-container input:focus {
+    background: var(--surface-3);
+    box-shadow: 0 0 0 2px var(--accent);
+}
+
+.input-container input:disabled {
+    background: var(--disabled-bg);
+    color: var(--disabled-text);
+}
+
+.input-container .label {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+    font-size: 16px;
+    pointer-events: none;
+    background: transparent;
+    padding: 0 4px;
+    transition: all 0.22s cubic-bezier(.4, 0, .2, 1);
+}
+
+.input-container input:focus~.label,
+.input-container input:not(:placeholder-shown)~.label {
+    top: 0;
+    font-size: 12px;
+    color: var(--accent);
+    transform: translateY(-120%);
+    background: var(--surface-1);
+    padding: 0 4px;
+}
+
+/* Button */
+.btn {
+    border-radius: 8px;
+    padding: 16px;
+    font-size: 17px;
+    font-weight: 600;
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+    width: 100%;
+    margin-top: 24px;
+    cursor: pointer;
+    transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.03);
+}
+
+[data-theme='dark'] .btn {
+    background: var(--accent);
+    color: var(--bg);
+}
+
+.btn:hover,
+.btn:focus {
+    background: var(--surface-3);
+    color: var(--text-primary);
+    box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.12);
+}
+
+[data-theme='dark'] .btn:hover,
+[data-theme='dark'] .btn:focus {
+    background: var(--surface-3);
+    color: var(--text-primary);
+}
+
+.btn:disabled {
+    background: var(--disabled-bg);
+    color: var(--disabled-text);
+    cursor: not-allowed;
+}
+
+/* Links */
+.links {
+    margin-top: 32px;
+    gap: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.links span {
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: underline;
+    color: var(--text-secondary);
+    transition: opacity 0.18s;
+    cursor: pointer;
+}
+
+.links span:hover {
+    opacity: 0.7;
+    color: var(--text-primary);
+}
+
+/* Messages */
+.error-message {
+    border-radius: 8px;
+    padding: 16px;
+    font-size: 15px;
+    margin: 24px 0;
+    background: var(--error);
+    color: #fff;
+    border: none;
+}
+
+.success-message {
+    border-radius: 8px;
+    padding: 16px;
+    font-size: 15px;
+    margin: 24px 0;
+    background: var(--success);
+    color: #fff;
+    border: none;
+}
+
+/* Error Notification (fixed) */
+.error {
+    width: 320px;
+    padding: 12px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    background: #ffffff;
+    border-radius: 4px;
+    border: 1px solid #000000;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 999999 !important;
+}
+
+.error__title {
+    font-weight: 500;
+    font-size: 14px;
+    color: #000000;
+}
+
+.error__close {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+/* Clickable Text */
+.clickable-text {
+    cursor: pointer;
+    color: #e1e1e1;
+    text-decoration: underline;
+}
+
+.clickable-text:hover {
+    color: #fff;
+}
+
+/* Link Button */
+.link-btn {
+    font-size: 18px;
+    color: #e1e1e1;
+    font-family: inherit;
+    font-weight: 800;
+    cursor: pointer;
+    position: relative;
+    border: none;
+    background: none;
+    text-transform: uppercase;
+    transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition-duration: 400ms;
+    transition-property: color;
+    margin: 0 5px;
+}
+
+.link-btn:focus,
+.link-btn:hover {
+    color: #fff;
+}
+
+.link-btn:focus:after,
+.link-btn:hover:after {
+    width: 100%;
+    left: 0%;
+}
+
+.link-btn:after {
+    content: "";
+    pointer-events: none;
+    bottom: -2px;
+    left: 50%;
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background-color: #fff;
+    transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition-duration: 400ms;
+    transition-property: width, left;
+}
+
+/* Loading Shimmer */
+.loading-shimmer {
+    background: linear-gradient(90deg,
+            var(--screen-background) 0%,
+            rgba(255, 255, 255, 0.1) 50%,
+            var(--screen-background) 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .screen {
+        margin: 16px;
+        padding: 20px 16px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    .input-container input[type="text"],
+    .input-container input[type="email"],
+    .input-container input[type="password"] {
+        padding: 10px;
+        font-size: 15px;
+    }
+
+    .btn {
+        padding: 10px;
+        font-size: 15px;
+    }
+}

@@ -1,0 +1,26 @@
+/* ===========================================
+   MAIN STYLESHEET - Imports all modules
+   =========================================== */
+
+/* Base - Variables, Fonts, Reset, Animations */
+@import url('./base.css');
+
+/* Components - Buttons, Inputs, Cards, Messages */
+@import url('./components.css');
+
+/* Animations - Transitions, Skeleton, Micro-interactions */
+@import url('./animations.css');
+
+/* Accessibility - Focus, ARIA, Touch targets */
+@import url('./a11y.css');
+
+/* Navigation - Burger Menu, Sidebar */
+@import url('./navigation.css');
+
+/* Theme - Torch Switch, Dark Mode */
+@import url('./theme.css');
+
+/* Screens */
+@import url('./screens/auth.css');
+@import url('./screens/main.css');
+@import url('./screens/settings.css');

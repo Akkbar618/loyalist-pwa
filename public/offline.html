@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline - Лоялист</title>
+    <style>
+        :root {
+            --bg: #111;
+            --text: #fff;
+            --accent: #4A90E2;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .offline-icon {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 24px;
+            opacity: 0.6;
+        }
+
+        .offline-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        p {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 400px;
+            line-height: 1.5;
+            margin-bottom: 32px;
+        }
+
+        .retry-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+
+        .retry-btn:hover {
+            transform: scale(1.02);
+        }
+
+        .retry-btn:active {
+            transform: scale(0.98);
+        }
+
+        .cached-pages {
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .cached-pages h3 {
+            font-size: 14px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 12px;
+        }
+
+        .cached-link {
+            color: var(--accent);
+            text-decoration: none;
+            padding: 8px 16px;
+            display: inline-block;
+        }
+
+        .cached-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="offline-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path
+                d="M1 1l22 22M16.72 11.06A10.94 10.94 0 0119 12.55M5 12.55a10.94 10.94 0 015.17-2.39M10.71 5.05A16 16 0 0122.58 9M1.42 9a15.91 15.91 0 014.7-2.88M8.53 16.11a6 6 0 016.95 0M12 20h.01" />
+        </svg>
+    </div>
+
+    <h1>Нет подключения</h1>
+    <p>Похоже, вы не подключены к интернету. Проверьте соединение и попробуйте снова.</p>
+
+    <button class="retry-btn" onclick="location.reload()">
+        Попробовать снова
+    </button>
+
+    <div class="cached-pages">
+        <h3>Или перейдите на сохранённую страницу:</h3>
+        <a href="/" class="cached-link">Главная</a>
+    </div>
+
+    <script>
+        // Auto-retry when connection is restored
+        window.addEventListener('online', () => {
+            location.reload();
+        });
+    </script>
+</body>
+
+</html>
