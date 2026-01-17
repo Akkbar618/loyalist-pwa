@@ -9,12 +9,20 @@ on:
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
+    env:
+      FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_TESTPLOYALIST || secrets.FIREBASE_SERVICE_ACCOUNT }}
     steps:
       - uses: actions/checkout@v4
       - run: echo "No build required"
+      - name: Check Firebase service account secret
+        if: ${{ env.FIREBASE_SERVICE_ACCOUNT == '' }}
+        run: |
+          echo "::warning::Missing Firebase service account secret. Add FIREBASE_SERVICE_ACCOUNT_TESTPLOYALIST (preferred) or FIREBASE_SERVICE_ACCOUNT in repo settings to enable deployment."
+          exit 0
       - uses: FirebaseExtended/action-hosting-deploy@v0
+        if: ${{ env.FIREBASE_SERVICE_ACCOUNT != '' }}
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_TESTPLOYALIST }}
+          firebaseServiceAccount: ${{ env.FIREBASE_SERVICE_ACCOUNT }}
           channelId: live
           projectId: testployalist
