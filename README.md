@@ -17,6 +17,15 @@ cp .env.example .env.local
 
 **Note:** The app works without Firebase in **Mock Mode** — just start the dev server!
 
+### GitHub Actions deploy (Firebase Hosting)
+
+To enable the deploy workflows, add a Firebase service account JSON to GitHub repository secrets:
+
+- Preferred: `FIREBASE_SERVICE_ACCOUNT_TESTPLOYALIST`
+- Alternative (generic): `FIREBASE_SERVICE_ACCOUNT`
+
+The workflows will skip deploys if neither secret is configured.
+
 ## 📁 Project Structure
 
 ```
